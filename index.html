@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nicolaita Chatbot</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="blank-page">
+
+    <!-- ========================================== -->
+    <!--          apartado del chatbot         -->
+    <!-- ========================================== -->
+
+    <!-- Floating Toggle Button -->
+    <div id="chat-toggle" class="chat-toggle-btn" title="Abrir Asistente Virtual">
+        <i class="fa-solid fa-comment-dots"></i>
+        <span class="pulse-badge"></span>
+    </div>
+
+    <!-- Chatbot Window Container -->
+    <div id="chatbot-container" class="chatbot-window">
+        
+        <!-- Header: Exact Replication (Insertar Frase de bienvenidaxd) & Close button -->
+        <div class="chat-header">
+            <span class="chat-header-title">(¡Hola, Nicolaita! ¿En qué puedo ayudarte? xd)</span>
+            <button id="chat-close" class="chat-close-btn" title="Cerrar Chat">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <!-- Chat Body: Light gray background, sandy bubbles and pill buttons -->
+        <div id="chat-body" class="chat-body">
+            
+            <!-- Welcome message with avatar & beige dialogue bubble -->
+            <div class="message-row bot-row">
+                <div class="bot-avatar" title="Asistente de San Nicolás">
+                    <img src="images/zorroicon.png" alt="Zorro Icon">
+                </div>
+                <div class="message-bubble bot-bubble">
+                    <p>
+                        <strong>¡Hola, Aspirante/Estudiante!</strong><br>
+                        Soy el asistente inteligente del Colegio Primitivo y Nacional de San Nicolás de Hidalgo. Puedo ayudarte con información sobre la convocatoria 2026, trámites, becas, historia y más.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Predefined Quick Action Buttons (Exact shape & sandy/gold style from image) -->
+            <div class="quick-options-container">
+                <button class="quick-btn" data-question="¿Cuáles son los requisitos de ingreso y el costo de la ficha?">Inscripciones y Costos</button>
+                <button class="quick-btn" data-question="¿Cuál es el calendario de la convocatoria de admisión 2026?">Calendario de Admisiones</button>
+                <button class="quick-btn" data-question="¿Qué áreas de estudio ofrece el bachillerato?">Planes de Estudio</button>
+                <button class="quick-btn" data-question="¿Cómo puedo tramitar el Seguro Facultativo del IMSS?">Seguro Facultativo</button>
+                <button class="quick-btn" data-question="¿Dónde se ubica el Colegio y en qué horarios atiende?">Ubicación y Horarios</button>
+                <button class="quick-btn" data-question="¿Dónde puedo consultar los horarios de clase y de mi sección?">Horarios de Clase</button>
+            </div>
+
+            <!-- Dynamic Messages will load here -->
+            <div id="chat-log" class="chat-log"></div>
+
+            <!-- Loading Indicator (Typing bubble) -->
+            <div id="typing-indicator" class="message-row bot-row hidden">
+                <div class="bot-avatar">
+                    <img src="images/zorroicon.png" alt="Zorro Icon">
+                </div>
+                <div class="message-bubble bot-bubble typing-bubble">
+                    <div class="typing-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Chat Input Footer -->
+        <div class="chat-footer">
+            <input type="text" id="chat-input" placeholder="Escribe tu pregunta aquí..." autocomplete="off">
+            <button id="chat-send" class="chat-send-btn" title="Enviar Mensaje">
+                <i class="fa-solid fa-paper-plane"></i>
+            </button>
+        </div>
+
+    </div>
+
+    <!-- Application Script -->
+    <script src="app.js"></script>
+</body>
+</html>
