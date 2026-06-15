@@ -96,9 +96,10 @@ function extractText(html) {
         .replace(/<style[\s\S]*?<\/style>/gi,   '')
         .replace(/<!--[\s\S]*?-->/g,             '')
         .replace(/<[^>]+>/g,                     ' ')
+        .replace(/(Página Principal|Dirección|Redes Sociales|Copyright|WebMaster|AI Website|Drag and Drop|Best AI|No Code|Free AI)/gi, '')
         .replace(/\s+/g,                         ' ')
         .trim()
-        .slice(0, 1200);
+        .slice(0, 800);
 }
 
 function extractLinks(html, baseUrl) {

@@ -884,7 +884,7 @@ a {
 .message-row {
     display: flex;
     gap: 12px;
-    max-width: 85%;
+    max-width: 70%;
     align-items: flex-start;
 }
 

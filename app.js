@@ -132,6 +132,38 @@ if (typeof window === 'undefined') {
     // Contexto dinámico cargado desde /api/contexto
     let contextoCache = null;
 
+    // Normalización de texto (eliminar acentos y diacríticos)
+    function normalizarTexto(texto) {
+        return (texto || '')
+            .toLowerCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "");
+    }
+
+    // Validación de temas fuera de contexto
+    const TEMAS_FUERA = ['receta', 'clima', 'futbol', 'politica', 'chiste', 'poema'];
+    function esFueraDeContexto(query) {
+        const queryNormalizada = normalizarTexto(query);
+        return TEMAS_FUERA.some(t => queryNormalizada.includes(t));
+    }
+
+    // Búsqueda de páginas relevantes por palabras clave
+    function buscarPaginasRelevantes(query, urlsSitio, topN = 5) {
+        const queryNormalizada = normalizarTexto(query);
+        const palabras = queryNormalizada.split(/\s+/).filter(w => w.trim().length > 1);
+        if (palabras.length === 0) return urlsSitio.slice(0, topN);
+
+        return urlsSitio
+            .map(p => {
+                const texto = normalizarTexto((p.titulo || '') + ' ' + (p.contenido || ''));
+                const score = palabras.filter(w => texto.includes(w)).length;
+                return { ...p, score };
+            })
+            .filter(p => p.score > 0)
+            .sort((a, b) => b.score - a.score)
+            .slice(0, topN);
+    }
+
     // ── Instrucción base (datos curados, siempre presentes) ───────────────────
     const BASE_INSTRUCTION = `
 Eres el "Asistente Nicolaita", un asesor virtual inteligente para el prestigioso e histórico "Colegio Primitivo y Nacional de San Nicolás de Hidalgo", perteneciente a la Universidad Michoacana de San Nicolás de Hidalgo (UMSNH).
@@ -212,7 +244,7 @@ LINEAMIENTOS DE PERSONALIDAD:
     }
 
     // ── Construir SYSTEM_INSTRUCTION combinando base + índice dinámico ─────────
-    function buildSystemInstruction() {
+    function buildSystemInstruction(queryText) {
         if (!contextoCache || !contextoCache.urlsSitio || contextoCache.urlsSitio.length === 0) {
             return BASE_INSTRUCTION;
         }
@@ -224,7 +256,14 @@ LINEAMIENTOS DE PERSONALIDAD:
         let extra = '\n\n7. ÍNDICE ACTUALIZADO DEL SITIO OFICIAL (actualización: ' + fecha + ')\n\n';
         extra += 'Utiliza el siguiente índice para responder preguntas específicas sobre cualquier sección del sitio web del colegio:\n\n';
 
-        const paginas = contextoCache.urlsSitio.slice(0, 100);
+        let paginas = [];
+        if (queryText) {
+            paginas = buscarPaginasRelevantes(queryText, contextoCache.urlsSitio, 5);
+        }
+        if (paginas.length === 0) {
+            paginas = contextoCache.urlsSitio.slice(0, 5);
+        }
+
         for (let i = 0; i < paginas.length; i++) {
             const p = paginas[i];
             if (!p.titulo && !p.descripcion && !p.contenido) continue;
@@ -328,6 +367,18 @@ LINEAMIENTOS DE PERSONALIDAD:
         appendMessage(queryText, 'user');
         scrollToBottom();
 
+        // Validación fuera de contexto
+        if (esFueraDeContexto(queryText)) {
+            showTyping(true);
+            setTimeout(() => {
+                showTyping(false);
+                const respuesta = 'Lo siento, como Asistente Nicolaita solo puedo responder preguntas relacionadas con el Colegio Primitivo y Nacional de San Nicolás de Hidalgo (horarios, admisiones, planes de estudio, historia, etc.).';
+                appendMessage(respuesta, 'bot');
+                scrollToBottom();
+            }, 600);
+            return;
+        }
+
         // 2. Agregar al historial de conversación
         conversationHistory.push({
             role:  'user',
@@ -346,7 +397,7 @@ LINEAMIENTOS DE PERSONALIDAD:
                 body: JSON.stringify({
                     contents: conversationHistory,
                     systemInstruction: {
-                        parts: [{ text: buildSystemInstruction() }]   // ← dinámico
+                        parts: [{ text: buildSystemInstruction(queryText) }]   // ← dinámico
                     },
                     generationConfig: {
                         temperature:     0.4,
