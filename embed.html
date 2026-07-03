@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asistente Nicolaita</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="vulpes-embed">
+    <div id="chatbot-container" class="chatbot-window active" role="dialog" aria-label="Asistente Nicolaita">
+        <div class="chat-header">
+            <span class="chat-header-title">Asistente Nicolaita</span>
+            <button id="chat-close" class="chat-close-btn" title="Cerrar chat" aria-label="Cerrar chat">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+        </div>
+        <div id="chat-body" class="chat-body">
+            <div class="message-row bot-row">
+                <div class="bot-avatar"><img src="/images/zorroicon.png" alt="Asistente Nicolaita"></div>
+                <div class="message-bubble bot-bubble">
+                    <p><strong>¡Hola!</strong> Pregúntame sobre admisiones, horarios, trámites y más.</p>
+                </div>
+            </div>
+            <div class="quick-options-container">
+                <button class="quick-btn" data-question="¿Cuáles son los requisitos de ingreso y el costo de la ficha?">Inscripciones</button>
+                <button class="quick-btn" data-question="¿Cuál es el calendario de la convocatoria de admisión 2026?">Admisiones 2026</button>
+                <button class="quick-btn" data-question="¿Dónde puedo consultar los horarios de clase?">Horarios</button>
+            </div>
+            <div id="chat-log" class="chat-log" role="log" aria-live="polite"></div>
+            <div id="typing-indicator" class="message-row bot-row hidden">
+                <div class="bot-avatar"><img src="/images/zorroicon.png" alt=""></div>
+                <div class="message-bubble bot-bubble typing-bubble">
+                    <div class="typing-dots"><span></span><span></span><span></span></div>
+                </div>
+            </div>
+        </div>
+        <div class="chat-footer">
+            <input type="text" id="chat-input" placeholder="Escribe tu pregunta..." autocomplete="off">
+            <button id="chat-send" class="chat-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+        </div>
+    </div>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const theme = params.get('theme') || 'light';
+        const autoOpen = params.get('autoOpen') !== 'false';
+        const apiBase = params.get('apiBase') || '';
+
+        if (theme === 'dark') {
+            document.body.classList.add('theme-dark');
+            const container = document.getElementById('chatbot-container');
+            if (container) {
+                container.classList.add('theme-dark');
+                container.setAttribute('data-theme', 'dark');
+            }
+        }
+
+        window.VULPES_CONFIG = {
+            autoOpen: autoOpen,
+            apiBase: apiBase
+        };
+
+        const closeBtn = document.getElementById('chat-close');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function () {
+                window.parent.postMessage('vulpes-close-chat', '*');
+            });
+        }
+    </script>
+    <script src="/chatbot.js"></script>
+</body>
+</html>

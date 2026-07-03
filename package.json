@@ -1,0 +1,16 @@
+{
+  "name": "vulpes",
+  "version": "1.1.0",
+  "description": "Nicolaita virtual assistant for CPNSNH (UMSNH)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "legacy": "node app.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": ["chatbot", "gemini", "education", "nicolaita"],
+  "license": "MIT"
+}

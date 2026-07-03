@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Prueba - Asistente Nicolaita (Vulpes)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0c2b53;
+            --gold: #d1a153;
+            --dark: #0f172a;
+            --light: #f8fafc;
+        }
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            color: var(--dark);
+            margin: 0;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        h1 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .subtitle {
+            color: #64748b;
+            font-size: 1.1rem;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 1px solid rgba(12, 43, 83, 0.05);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card h2 {
+            color: var(--primary);
+            margin-top: 0;
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 10px;
+            font-size: 1.4rem;
+        }
+        code {
+            background: #f1f5f9;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            display: block;
+            margin: 15px 0;
+            overflow-x: auto;
+            border-left: 4px solid var(--gold);
+        }
+        .demo-box {
+            border: 1px dashed #cbd5e1;
+            border-radius: 12px;
+            padding: 15px;
+            background: #f8fafc;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-family: inherit;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-right: 10px;
+        }
+        .btn:hover {
+            background-color: #071b34;
+        }
+        .btn-gold {
+            background-color: var(--gold);
+            color: var(--primary);
+        }
+        .btn-gold:hover {
+            background-color: #b88a3e;
+        }
+        .badge {
+            background: var(--gold);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <span class="badge">Nicolaita Assistant Widget v2.0</span>
+            <h1>Demostración de Integración Embebible</h1>
+            <p class="subtitle">Prueba las diferentes formas en las que las dependencias escolares pueden integrar al Asistente Nicolaita.</p>
+        </header>
+
+        <div class="grid">
+            <!-- 1. Web Component Inline Mode -->
+            <div class="card">
+                <h2>1. Web Component Autocontenido (Modo Inline)</h2>
+                <p>Inserta la caja de chat directamente en el flujo y diseño de la página usando la etiqueta <code>&lt;nicolaita-chat&gt;</code> en modo inline y tema oscuro.</p>
+                <code>&lt;nicolaita-chat data-mode="inline" data-theme="dark"&gt;&lt;/nicolaita-chat&gt;</code>
+                <div class="demo-box" style="padding: 0; min-height: 500px;">
+                    <!-- We instantiate the custom component inline -->
+                    <nicolaita-chat data-mode="inline" data-theme="dark" style="width: 100%; height: 100%;"></nicolaita-chat>
+                </div>
+            </div>
+
+            <!-- 2. Web Component Widget Mode -->
+            <div class="card">
+                <h2>2. Web Component (Modo Widget Flotante)</h2>
+                <p>Agrega el widget en su modo flotante en la esquina inferior izquierda con tema claro y apertura automática desactivada.</p>
+                <code>&lt;nicolaita-chat data-mode="widget" data-theme="light" data-position="bottom-left" data-auto-open="false"&gt;&lt;/nicolaita-chat&gt;</code>
+                <div class="demo-box">
+                    <p style="text-align: center; color: #64748b;">
+                        Mira en la esquina inferior izquierda.<br>Ahí verás el botón flotante del Web Component.<br><br>
+                        <button class="btn btn-gold" onclick="toggleWidgetTheme()">Cambiar Tema a Oscuro / Claro</button>
+                    </p>
+                    <nicolaita-chat id="floating-comp" data-mode="widget" data-theme="light" data-position="bottom-left" data-auto-open="false"></nicolaita-chat>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="margin-bottom: 40px;">
+            <h2>3. Script de una línea (Modo Iframe - Recomendado)</h2>
+            <p>La manera más simple. Cualquier sitio web escolar de la UMSNH puede cargarlo agregando solo esta línea en su HTML. Esto aísla por completo el chat en un iframe y minimiza la carga en el cliente.</p>
+            <code>&lt;script src="/vulpes-widget.js" data-mode="iframe" data-theme="dark" data-position="bottom-right" data-auto-open="false"&gt;&lt;/script&gt;</code>
+            <p>Mira la esquina inferior derecha de esta página para interactuar con la versión Iframe.</p>
+        </div>
+    </div>
+
+    <!-- We load the widget library at the bottom.
+         Since data-mode is set to iframe, it will automatically inject the iframe widget on the bottom-right.
+    -->
+    <script src="/vulpes-widget.js" data-mode="iframe" data-theme="dark" data-position="bottom-right" data-auto-open="false"></script>
+
+    <script>
+        function toggleWidgetTheme() {
+            const comp = document.getElementById('floating-comp');
+            if (comp) {
+                const current = comp.getAttribute('data-theme') || 'light';
+                const next = current === 'light' ? 'dark' : 'light';
+                comp.setAttribute('data-theme', next);
+                alert('Tema cambiado a: ' + next);
+            }
+        }
+    </script>
+</body>
+</html>

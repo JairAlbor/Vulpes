@@ -1,0 +1,81 @@
+{
+  "meta": {
+    "version": "2026-07-03",
+    "lastVerified": "2026-07-03",
+    "notes": "Update convocatoria dates when the school publishes new notices on colegio.umich.mx/avisos.html"
+  },
+  "institution": {
+    "name": "Colegio Primitivo y Nacional de San Nicolás de Hidalgo",
+    "shortName": "CPNSNH",
+    "university": "Universidad Michoacana de San Nicolás de Hidalgo (UMSNH)",
+    "motto": "Patria, Ciencia y Libertad",
+    "founded": 1540,
+    "rectora": "Dra. Yarabí Ávila González",
+    "regente": "Dra. Janeth Morales Cortés (Regencia 2022-2026)",
+    "cct": "16UBH0019C"
+  },
+  "contacto": {
+    "direccion": "Av. Madero Poniente 351, Col. Centro, C.P. 58000, Morelia, Michoacán, México.",
+    "correo": "sria.acad.cpnsnh@umich.mx",
+    "horarioMatutino": "7:00 AM – 2:00 PM",
+    "horarioVespertino": "2:00 PM – 9:00 PM",
+    "telefonos": ["443 271 86 35", "443 261 04 56"],
+    "telefonoHorario": "lunes a jueves de 10:00 a 13:00 hrs."
+  },
+  "horarios": {
+    "portal": "https://www.colegio.umich.mx/horarios/horarios.html",
+    "semestresNon": "https://www.colegio.umich.mx/horarios/semestrenon.html",
+    "semestresPar": "https://www.colegio.umich.mx/horarios/semestrepar.html",
+    "trayectorias3non": "https://www.colegio.umich.mx/horarios/trayectorias3non.html",
+    "trayectorias5non": "https://www.colegio.umich.mx/horarios/trayectorias5non.html",
+    "trayectoriasPar": "https://www.colegio.umich.mx/horarios/tacad-par.html"
+  },
+  "convocatoria2026": {
+    "ciclo": "2026/2027",
+    "nivel": "Bachillerato Nicolaita",
+    "registroUrl": "https://www.umich.mx",
+    "registroInicio": "20 de febrero de 2026 a las 18:00 hrs.",
+    "registroFin": "25 de junio de 2026",
+    "registroNota": "El trámite es personal; no se aceptan gestores. Registro exclusivamente en www.umich.mx.",
+    "examenes": "30 de junio al 3 de julio de 2026",
+    "resultados": "3 y 6 de julio de 2026",
+    "inicioClases": "10 de agosto de 2026",
+    "costoFicha": "$1,576.00 MXN",
+    "costoNota": "Además se paga el Curso de Inducción.",
+    "requisitos": [
+      "CURP",
+      "Acta de nacimiento",
+      "Certificado de secundaria",
+      "Comprobante de domicilio",
+      "Identificación con foto (PDF/JPG)",
+      "NSS",
+      "Correo electrónico y teléfono activos"
+    ],
+    "asignacionPreparatoria": "Aleatoria, sujeta al cupo de las 7 preparatorias de la UMSNH."
+  },
+  "planEstudios": {
+    "sistema": "Semestral, 3 años (6 semestres), propedéutico (no terminal).",
+    "troncoComun": "1er a 4to semestre.",
+    "areasPropedeuticas": [
+      "Económico-Administrativas",
+      "Histórico-Sociales",
+      "Químico-Biológicas",
+      "Ingeniería",
+      "Arquitectura"
+    ],
+    "areasSemestres": "5to y 6to semestre."
+  },
+  "servicios": {
+    "seguroFacultativo": "Gratuito para alumnos inscritos sin otra seguridad social. Se tramita con el NSS al inscribirse.",
+    "justificantes": "Secretaría Académica (correo o módulo s-justificantes.html).",
+    "alertaTemprana": "https://planificador.lugh.mx/informacion_reportes",
+    "siia": "https://www.siia.umich.mx",
+    "becaBenitoJuarez": "https://www.gob.mx/becasbenitojuarez/articulos/beca-universal-de-educacion-media-superior-benito-juarez"
+  },
+  "historia": [
+    "Fundado en 1540 por Don Vasco de Quiroga en Pátzcuaro; trasladado a Valladolid (Morelia) en 1580. Es el colegio más antiguo de América.",
+    "Conocido como 'Cuna Ideológica de la Independencia de México'.",
+    "Don Miguel Hidalgo y Costilla fue alumno, catedrático y Regente del Colegio.",
+    "José María Morelos y Pavón fue uno de sus alumnos más célebres."
+  ]
+}
