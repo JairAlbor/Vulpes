@@ -5,8 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js",
-    "legacy": "node app.js"
+    "dev": "node server.js"
   },
   "engines": {
     "node": ">=18"
